@@ -1,0 +1,139 @@
+/*
+N 개의 값으로 이루어진 배열이 주어졌을 때, 주어진 K 횟수 만큼 오른쪽으로 배열을 회전(rotating) 시킵니다. 
+모든 원소는 오른쪽으로 K 만큼 이동하게 되며, 배열 오른쪽 밖으로 밀려난 원소는 왼쪽으로부터 추가됩니다. 
+예를 들면 K=1 일때, 가장 오른쪽에서 있던 원소는 왼쪽 첫번째 위치로 이동하게 됩니다.
+
+예를 들면, 배열 [3, 8, 9, 7, 6] 을 한번 회전시키면 [6, 3, 8, 9, 7] 이 되고, K = 3 번 회전 시키면 [9, 7, 6, 3, 8] 이 됩니다.
+
+입력은 두 행의 표준 입력입니다.
+
+첫 번째 행은 space 로 구분된 문자열입니다.
+두 번째 행은 회전시킬 횟수 K 값입니다. 값 K는 반드시 정수로만 주어집니다.
+예를들면 다음과 같은 입력이 주어졌을 때
+
+3 8 9 7 6
+3
+다음과 같이 출력해주시면 됩니다.
+
+9 7 6 3 8
+*/
+/*
+삼각형 형태를 구하라.
+*/
+
+using System;
+
+namespace _000_test_01
+{
+	class Program
+	{
+		static void Main(string[] args)
+		{
+			string arr;
+			try
+			{
+				arr = Console.ReadLine();
+			}
+			catch(Exception e) { Console.WriteLine(e.Message); return; }
+
+			string[] src_arr = arr.Split(new char[] { ' ' });
+			int k;
+			try
+			{
+				string _k = Console.ReadLine();
+				k = Convert.ToInt32(_k);
+			}
+			catch(Exception e) { Console.WriteLine(e.Message); return; }
+
+			int len;
+			try
+			{
+				len = src_arr.Length;
+			}
+			catch(Exception e) { Console.WriteLine(e.Message); return; }
+
+
+			while(k < 0)
+				k += len;
+			while(k >= len)
+				k -= len;
+
+			string[] dst_arr = new string[len];
+			for(int idx_src = 0, idx_dst = k; idx_src < len; idx_src++, idx_dst++)
+			{
+				if(idx_dst >= len)
+					idx_dst = 0;
+
+				dst_arr[idx_dst] = src_arr[idx_src];
+			}
+
+			try
+			{
+				foreach(var a in dst_arr)
+					Console.Write(a + " ");
+				Console.WriteLine();
+			}
+			catch(Exception e) { Console.WriteLine(e.Message); return; }
+
+			//string arr;
+			//try
+			//{
+			//	arr = Console.ReadLine();
+			//}
+			//catch(Exception e) { Console.WriteLine(e.Message); return; }
+			//string[] arr_src = arr.Split(new char[] { ' ' });
+
+			//int retval = 0;
+			//if(arr_src.Length != 3)
+			//{
+			//	try
+			//	{
+			//		Console.WriteLine(retval);
+			//	}
+			//	catch(Exception e) { Console.WriteLine(e.Message); }
+			//	return;
+			//}
+
+			//int[] arr_n = new int[3];
+			//int idx_max = 0;
+			//int sum_other = 0;
+			//for(int i = 0; i < 3; i++)
+			//{
+			//	try
+			//	{
+			//		arr_n[i] = Convert.ToInt32(arr_src[i]);
+			//		if(arr_n[i] > arr_n[idx_max])
+			//		{
+			//			sum_other += arr_n[idx_max];
+			//			idx_max = i;
+			//		}
+			//		else if(i != 0)
+			//			sum_other += arr_n[i];
+
+			//		if(arr_n[i] <= 0
+			//			|| (i == 2 && sum_other <= arr_n[idx_max]))
+			//		{
+			//			retval = -1;
+			//			break;
+			//		}
+
+			//		if(i >= 1 && arr_n[i - 1] == arr_n[i])
+			//			retval++;
+
+			//		if(retval == 0 && i == 2 && arr_n[0] == arr_n[2])
+			//			retval++;
+			//	}
+			//	catch(Exception e)
+			//	{
+			//		if((e as FormatException) != null)
+			//		{
+			//			retval = -1;
+			//		}
+			//		break;
+			//	}
+			//}
+
+			//Console.WriteLine(++retval);
+		}
+	}
+}
